@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/appseed', async (req, res, next) => {
-  //check
+  //check it
   let getResult
   try{
   getResult = await client.getSecret("APPSEED")
