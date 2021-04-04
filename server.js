@@ -21,9 +21,11 @@ const client = new SecretClient(vaultUrl, credential)
 app.use(helmet());
 app.use(compression()); //Compress all routes
 
-app.use(function(req, res) {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://nearpersonas.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET');
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next()
 });
 
 app.get('/appseed', async (req, res) => {
