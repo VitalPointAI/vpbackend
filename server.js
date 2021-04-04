@@ -26,7 +26,7 @@ app.use(compression()); //Compress all routes
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 // });
 
-app.get('/appseed', async (req, res, next) => {
+app.get('/appseed', async (req, res) => {
   //check it
   let getResult
   try{
@@ -37,7 +37,7 @@ app.get('/appseed', async (req, res, next) => {
   res.send(getResult);
  });
 
- app.get('/didkey', async (req, res, next) => {
+ app.get('/didkey', async (req, res) => {
   let getResult
   try{
   getResult = await client.getSecret("DIDCONTRACTPRIVKEY")
