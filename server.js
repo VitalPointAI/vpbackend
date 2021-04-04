@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const path = require('path')
 const app = express()
+const cors = require('cors')
 const helmet = require('helmet');
 
 // Azure authentication library to access Azure Key Vault
@@ -20,13 +21,15 @@ const client = new SecretClient(vaultUrl, credential)
 
 app.use(helmet());
 app.use(compression()); //Compress all routes
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "nearpersonas.com"); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Methods', 'GET');
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next()
-});
+app.use(cors({
+  origin: 'https://nearpersonas.com'
+}));
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "nearpersonas.com"); // update to match the domain you will make the request from
+//   res.header('Access-Control-Allow-Methods', 'GET');
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   next()
+// });
 
 app.get('/appseed', async (req, res) => {
   //check it
