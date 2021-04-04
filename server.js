@@ -17,12 +17,12 @@ const client = new SecretClient(vaultUrl, credential)
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-var corsOptions = {
-  origin: 'https://nearpersonas.com',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// var corsOptions = {
+//   origin: 'https://nearpersonas.com',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
-app.get('/appseed', cors(corsOptions), async (req, res) => {
+app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res) => {
   let getResult
   try{
   getResult = await client.getSecret("APPSEED")
@@ -32,7 +32,7 @@ app.get('/appseed', cors(corsOptions), async (req, res) => {
   res.send(getResult);
  });
 
- app.get('/didkey', cors(corsOptions), async (req, res) => {
+ app.get('/didkey', cors({origin: 'https://nearpersonas.com'}), async (req, res) => {
   let getResult
   try{
   getResult = await client.getSecret("DIDCONTRACTPRIVKEY")
