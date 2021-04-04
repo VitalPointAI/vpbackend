@@ -17,15 +17,15 @@ const client = new SecretClient(vaultUrl, credential)
 
 //app.use(express.static(path.join(__dirname, 'dist')));
 
-var corsOptions = {
+const corsOptions = {
   origin: 'https://nearpersonas.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://nearpersonas.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+  // res.header("Access-Control-Allow-Origin", "https://nearpersonas.com"); // update to match the domain you will make the request from
+  // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  // next();
 });
 
 app.get('/appseed', cors(corsOptions), async (req, res, next) => {
