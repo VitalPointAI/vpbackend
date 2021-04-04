@@ -22,6 +22,12 @@ const client = new SecretClient(vaultUrl, credential)
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://nearpersonas.com"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res, next) => {
   let getResult
   try{
