@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
-var cors = require('cors')
 
 // Azure authentication library to access Azure Key Vault
 const { DefaultAzureCredential } = require("@azure/identity")
@@ -28,7 +27,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res, next) => {
+app.get('/appseed', async (req, res, next) => {
   let getResult
   try{
   getResult = await client.getSecret("APPSEED")
@@ -38,7 +37,7 @@ app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res,
   res.send(getResult);
  });
 
- app.get('/didkey', cors({origin: 'https://nearpersonas.com'}), async (req, res, next) => {
+ app.get('/didkey', async (req, res, next) => {
   let getResult
   try{
   getResult = await client.getSecret("DIDCONTRACTPRIVKEY")
