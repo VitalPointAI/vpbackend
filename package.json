@@ -20,6 +20,7 @@
   "dependencies": {
     "@azure/identity": "^1.2.5",
     "@azure/keyvault-secrets": "^4.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   }
 }
