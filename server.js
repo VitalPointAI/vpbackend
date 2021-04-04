@@ -1,8 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const compression = require('compression')
 const path = require('path')
 const cors = require('cors')
 const app = express()
+const helmet = require('helmet');
 
 // Azure authentication library to access Azure Key Vault
 const { DefaultAzureCredential } = require("@azure/identity")
@@ -21,6 +23,8 @@ const corsOptions = {
   origin: 'https://nearpersonas.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+app.use(helmet());
+app.use(compression()); //Compress all routes
 
 app.use(function(req, res, next) {
   // res.header("Access-Control-Allow-Origin", "https://nearpersonas.com"); // update to match the domain you will make the request from
