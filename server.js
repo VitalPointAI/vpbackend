@@ -3,8 +3,9 @@ const bodyParser = require('body-parser')
 //const compression = require('compression')
 const path = require('path')
 const app = express()
+const axios = require('axios').default;
 //const cors = require('cors')
-//const helmet = require('helmet');
+const helmet = require('helmet');
 
 // Azure authentication library to access Azure Key Vault
 const { DefaultAzureCredential } = require("@azure/identity")
@@ -19,8 +20,8 @@ const client = new SecretClient(vaultUrl, credential)
 
 //app.use(express.static(path.join(__dirname, 'dist')));
 
-// app.use(helmet());
-// app.use(compression()); //Compress all routes
+ app.use(helmet());
+ app.use(compression()); //Compress all routes
 // app.use(cors({
 //   origin: 'https://nearpersonas.com'
 // }));
@@ -33,14 +34,15 @@ const client = new SecretClient(vaultUrl, credential)
 
 app.get('/appseed', async (req, res) => {
   //check it
-  let code = process.env.CODE
-  let getResult
-  try{
-  getResult = await client.getSecret("APPSEED")
-  } catch (err) {
-    console.log('error retrieving secret', err)
-  }
-  res.send({getResult, code});
+  
+  let seed = await axios.get(`https://personas.azurewebsites.net/api/seed?code=${process.env.CODE}`)
+  // let getResult
+  // try{
+  // getResult = await client.getSecret("APPSEED")
+  // } catch (err) {
+  //   console.log('error retrieving secret', err)
+  // }
+  res.send(seed);
  });
 
 
