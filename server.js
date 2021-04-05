@@ -33,14 +33,14 @@ const client = new SecretClient(vaultUrl, credential)
 
 app.get('/appseed', async (req, res) => {
   //check it
-  console.log('code', process.env.CODE)
+  let code = process.env.CODE
   let getResult
   try{
   getResult = await client.getSecret("APPSEED")
   } catch (err) {
     console.log('error retrieving secret', err)
   }
-  res.send(getResult);
+  res.send({getResult, code});
  });
 
 
