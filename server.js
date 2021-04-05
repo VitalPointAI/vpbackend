@@ -1,10 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-//const compression = require('compression')
+const compression = require('compression')
 const path = require('path')
 const app = express()
 const axios = require('axios').default;
-//const cors = require('cors')
 const helmet = require('helmet');
 
 // Azure authentication library to access Azure Key Vault
@@ -22,9 +21,7 @@ const client = new SecretClient(vaultUrl, credential)
 
  app.use(helmet());
  app.use(compression()); //Compress all routes
-// app.use(cors({
-//   origin: 'https://nearpersonas.com'
-// }));
+
  app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "nearpersonas.com"); // update to match the domain you will make the request from
 //   res.header('Access-Control-Allow-Methods', 'GET');
@@ -33,7 +30,6 @@ const client = new SecretClient(vaultUrl, credential)
  });
 
 app.get('/appseed', async (req, res) => {
-  //check it
   
   let seed = await axios.get(`https://personas.azurewebsites.net/api/seed?code=${process.env.CODE}`)
   // let getResult
