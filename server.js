@@ -11,7 +11,7 @@ app.use(cors())
    next()
  });
 
-app.get('/appseed', async (req, res) => {
+app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res) => {
   let seed
   try{
     let code = process.env.CODE
