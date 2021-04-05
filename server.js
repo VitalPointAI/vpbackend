@@ -2,7 +2,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
+const cors = require('cors')
 const axios = require('axios').default
+
+app.use(cors())
 
  app.use(function(req, res, next) {
    next()
