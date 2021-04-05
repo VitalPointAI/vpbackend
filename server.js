@@ -10,9 +10,9 @@ const axios = require('axios').default
 
 app.get('/appseed', async (req, res) => {
   res.header("Access-Control-Allow-Origin", "https://nearpersonas.com")
-  res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With")
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Type,Content-Length, Authorization, Accept,X-Requested-With")
   res.header("Access-Control-Allow-Methods", "GET")
-  
+
   let seed
   try{
     let code = process.env.CODE
