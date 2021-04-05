@@ -2,16 +2,17 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
-const cors = require('cors')
 const axios = require('axios').default
-
-app.use(cors())
 
  app.use(function(req, res, next) {
    next()
  });
 
-app.get('/appseed', cors({origin: 'https://nearpersonas.com'}), async (req, res) => {
+app.get('/appseed', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://nearpersonas.com")
+  res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With")
+  res.header("Access-Control-Allow-Methods", "GET")
+  
   let seed
   try{
     let code = process.env.CODE
