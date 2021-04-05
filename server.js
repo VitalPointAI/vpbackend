@@ -46,7 +46,7 @@ app.get('/appseed', async (req, res) => {
   // } catch (err) {
   //   console.log('error retrieving secret', err)
   // }
-  res.send(seed);
+  res.send(seed.data);
  });
 
 
