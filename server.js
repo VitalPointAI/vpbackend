@@ -7,15 +7,15 @@ const axios = require('axios').default
 //const compression = require('compression')
 
 // Azure authentication library to access Azure Key Vault
-const { DefaultAzureCredential } = require("@azure/identity")
-const { SecretClient } = require("@azure/keyvault-secrets")
+//const { DefaultAzureCredential } = require("@azure/identity")
+//const { SecretClient } = require("@azure/keyvault-secrets")
 
 // Azure SDK clients accept the credential as a parameter
-const credential = new DefaultAzureCredential()
-let vaultUrl = 'https://vitalpointkeys.vault.azure.net/'
+//const credential = new DefaultAzureCredential()
+//let vaultUrl = 'https://vitalpointkeys.vault.azure.net/'
 
 // Create authenticated client
-const client = new SecretClient(vaultUrl, credential)
+//const client = new SecretClient(vaultUrl, credential)
 
 //app.use(express.static(path.join(__dirname, 'dist')));
 
@@ -32,7 +32,10 @@ const client = new SecretClient(vaultUrl, credential)
 app.get('/appseed', async (req, res) => {
   let seed
   try{
-    seed = await axios.get(`https://personas.azurewebsites.net/api/seed?code=${process.env.CODE}`)
+    let code = process.env.CODE
+    console.log(code)
+    seed = await axios.get('https://personas.azurewebsites.net/api/seed?code='+code)
+    console.log('seed', seed)
   } catch (err) {
     console.log('error retrieving seed', err)
     res.send('error')
