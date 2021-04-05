@@ -1,10 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const compression = require('compression')
 const path = require('path')
 const app = express()
-const axios = require('axios').default;
-const helmet = require('helmet');
+const axios = require('axios').default
+const helmet = require('helmet')
+const compression = require('compression')
 
 // Azure authentication library to access Azure Key Vault
 const { DefaultAzureCredential } = require("@azure/identity")
@@ -30,8 +30,12 @@ const client = new SecretClient(vaultUrl, credential)
  });
 
 app.get('/appseed', async (req, res) => {
-  
-  let seed = await axios.get(`https://personas.azurewebsites.net/api/seed?code=${process.env.CODE}`)
+  let seed
+  try{
+    seed = await axios.get(`https://personas.azurewebsites.net/api/seed?code=${process.env.CODE}`)
+  } catch (err) {
+    console.log('error retrieving seed', err)
+  }
   // let getResult
   // try{
   // getResult = await client.getSecret("APPSEED")
