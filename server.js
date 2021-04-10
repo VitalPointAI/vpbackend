@@ -12,12 +12,23 @@ const axios = require('axios').default
  });
 
 app.get('/appseed', async (req, res) => {
-  
-
   let seed
   try{
     let code = process.env.CODE
     seed = await axios.get('https://personas.azurewebsites.net/api/seed?code='+code)
+  } catch (err) {
+    console.log('error retrieving seed', err)
+    res.send('error')
+  }
+ 
+  res.send(seed.data);
+ });
+
+ pp.get('/didkey', async (req, res) => {
+  let seed
+  try{
+    let code = process.env.DID
+    seed = await axios.get('https://personas.azurewebsites.net/api/didkey?code='+code)
   } catch (err) {
     console.log('error retrieving seed', err)
     res.send('error')
