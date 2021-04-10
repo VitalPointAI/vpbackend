@@ -24,7 +24,7 @@ app.get('/appseed', async (req, res) => {
   res.send(seed.data);
  });
 
- pp.get('/didkey', async (req, res) => {
+ app.get('/didkey', async (req, res) => {
   let seed
   try{
     let code = process.env.DID
