@@ -37,5 +37,18 @@ app.get('/appseed', async (req, res) => {
   res.send(seed.data);
  });
 
+ app.get('/airtable', async (req, res) => {
+  let seed
+  try{
+    let airtableCode = process.env.AIRTABLE_CODE
+    seed = await axios.get('https://personas.azurewebsites.net/api/airtable?code='+airtableCode)
+  } catch (err) {
+    console.log('error retrieving seed', err)
+    res.send('error')
+  }
+ 
+  res.send(seed.data);
+ });
+
 
 app.listen(process.env.PORT || 8080);
