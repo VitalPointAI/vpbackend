@@ -43,8 +43,9 @@ app.get('/appseed', async (req, res) => {
  });
 
  app.get('/airtable', async (req, res) => {
+  let airtable
   try{
-    const airtable = {
+    airtable = {
       airtableKey: process.env.AIRTABLE_KEY,
       contributorBase: process.env.CONTRIBUTOR_BASE,
       contributorTable: process.env.CONTRIBUTOR_TABLE,
