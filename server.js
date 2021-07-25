@@ -43,16 +43,21 @@ app.get('/appseed', async (req, res) => {
  });
 
  app.get('/airtable', async (req, res) => {
-  let seed
   try{
-    let airtableCode = process.env.AIRTABLE_CODE
-    seed = await axios.get('https://personas.azurewebsites.net/api/airtable?code='+airtableCode)
+    const airtable = {
+      airtableKey: process.env.AIRTABLE_KEY,
+      contributorBase: process.env.CONTRIBUTOR_BASE,
+      contributorTable: process.env.CONTRIBUTOR_TABLE,
+      projectBase: process.env.PROJECT_BASE,
+      projectTable: process.env.PROJECT_TABLE
+  }
+ //   seed = await axios.get('https://personas.azurewebsites.net/api/airtable?code='+airtableCode)
   } catch (err) {
-    console.log('error retrieving seed', err)
+    console.log('error retrieving airtable data', err)
     res.send('error')
   }
  
-  res.send(seed.data);
+  res.send(airtable);
  });
 
 
